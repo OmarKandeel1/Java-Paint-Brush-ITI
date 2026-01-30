@@ -83,7 +83,7 @@ public class DrawingPanel extends JPanel {
 
             @Override
             public void mouseReleased(MouseEvent e) {
-                if (currentShape == ShapeType.FREE_HAND) {
+                if (currentShape == ShapeType.FREE_HAND || currentShape == ShapeType.ERASER) {
                     return;
                 }
 
@@ -103,7 +103,21 @@ public class DrawingPanel extends JPanel {
                 endX = e.getX();
                 endY = e.getY();
 
+                if (currentShape == ShapeType.ERASER) {
+                    Color drawColor;
+                    drawColor = Color.WHITE;
+                    Shape line = new java.awt.geom.Line2D.Float(prevX, prevY, endX, endY);
+
+                    shapes.add(new DrawShape(
+                            line,
+                            drawColor,
+                            new BasicStroke(10), // thick eraser
+                            false
+                    ));
+
+                }
                 if (currentShape == ShapeType.FREE_HAND) {
+
                     Shape line = new java.awt.geom.Line2D.Float(prevX, prevY, endX, endY);
 
                     shapes.add(new DrawShape(
@@ -145,6 +159,19 @@ public class DrawingPanel extends JPanel {
 
     public void setDotted(boolean dotted) {
         this.dotted = dotted;
+    }
+
+    public void clearAll() {
+        shapes.clear();
+        previewShape = null;
+        repaint();
+    }
+
+    public void undo() {
+        if (!shapes.isEmpty()) {
+            shapes.remove(shapes.size() - 1);
+            repaint();
+        }
     }
 
 //*****************************     protected Section *******************************//     

@@ -100,6 +100,20 @@ public class PaintApp extends JFrame {
         );
 
         //***************************************************************************************************************// 
+        //***************************************** Clear All Button Section  ******************************************//
+        JButton clearBtn = new JButton("Clear All");
+        toolbar.add(clearBtn);
+
+        clearBtn.addActionListener(e -> drawingPanel.clearAll());
+
+        //***************************************************************************************************************// 
+        
+        
+        //***************************************** Undo Button Section  ******************************************//
+        JButton undoBtn = new JButton("Undo");
+        toolbar.add(undoBtn);
+        undoBtn.addActionListener(e -> drawingPanel.undo());
+        //***************************************************************************************************************// 
         setVisible(true);
     }
 
