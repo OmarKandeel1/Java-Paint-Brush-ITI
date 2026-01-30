@@ -15,6 +15,7 @@ public class DrawingPanel extends JPanel {
     private List<DrawShape> shapes = new ArrayList<>();
     private int startX, startY, endX, endY;
     private DrawShape previewShape;
+    private boolean filled = true; // default value of filled is not filled "FALSE"
 
     private void createPreviewShape() {
         int x = Math.min(startX, endX);
@@ -45,7 +46,7 @@ public class DrawingPanel extends JPanel {
                 shape,
                 currentColor,
                 new BasicStroke(2),
-                false
+                filled
         );
     }
 
@@ -89,30 +90,45 @@ public class DrawingPanel extends JPanel {
         this.currentColor = color;
     }
 
-  public void setCurrentShape(ShapeType shapeType) {
-    this.currentShape = shapeType;
-}
+    public void setCurrentShape(ShapeType shapeType) {
+        this.currentShape = shapeType;
+    }
 
     public enum ShapeType { //shape class
         RECTANGLE, OVAL, LINE, FREE_HAND, ERASER
     }
 
+    public void setFilled(boolean filled) {
+        this.filled = filled;
+    }
+
 //*****************************     protected Section *******************************//     
     @Override
     protected void paintComponent(Graphics g) {
-    super.paintComponent(g);
-    Graphics2D g2 = (Graphics2D) g;
+        super.paintComponent(g);
+        Graphics2D g2 = (Graphics2D) g;
 
-    for (DrawShape s : shapes) {
-        g2.setColor(s.color);
-        g2.setStroke(s.stroke);
-        g2.draw(s.shape);
-    }
+        for (DrawShape s : shapes) {
+            g2.setColor(s.color);
+            g2.setStroke(s.stroke);
+            g2.draw(s.shape);
+            if (s.filled && !(s.shape instanceof java.awt.geom.Line2D)) {
+                g2.fill(s.shape);
+            } else {
+                g2.draw(s.shape);
+            }
+        }
 
-    if (previewShape != null) {
-        g2.setColor(previewShape.color);
-        g2.setStroke(previewShape.stroke);
-        g2.draw(previewShape.shape);
+        if (previewShape != null) {
+            g2.setColor(previewShape.color);
+            g2.setStroke(previewShape.stroke);
+
+            if (previewShape.filled && !(previewShape.shape instanceof java.awt.geom.Line2D)) {
+                g2.fill(previewShape.shape);
+            } else {
+                g2.draw(previewShape.shape);
+            }
+        }
+
     }
-}
 }

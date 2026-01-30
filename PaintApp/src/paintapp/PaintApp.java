@@ -61,8 +61,7 @@ public class PaintApp extends JFrame {
         greenBtn.addActionListener(e -> drawingPanel.setCurrentColor(Color.GREEN));
         blueBtn.addActionListener(e -> drawingPanel.setCurrentColor(Color.BLUE));
         //*******************************************************************************************//
-        
-        
+
         //***************************************** Shape Section  *****************************************//
         JButton rectBtn = new JButton("Rectangle");
         JButton ovalBtn = new JButton("Oval");
@@ -83,6 +82,15 @@ public class PaintApp extends JFrame {
         eraserBtn.addActionListener(e -> drawingPanel.setCurrentShape(ShapeType.ERASER));
 
         //*******************************************************************************************//
+        //***************************************** Filled Cheeck Box Section  ******************************************//
+        JCheckBox filledCheck = new JCheckBox("Filled");
+        toolbar.add(filledCheck);
+
+        filledCheck.addActionListener(e
+                -> drawingPanel.setFilled(filledCheck.isSelected())
+        );
+
+        //***************************************************************************************************************//
         setVisible(true);
     }
 
@@ -90,6 +98,5 @@ public class PaintApp extends JFrame {
         // TODO code application logic here
         SwingUtilities.invokeLater(PaintApp::new);
     }
-
 
 }
