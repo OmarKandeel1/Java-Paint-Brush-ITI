@@ -91,6 +91,15 @@ public class PaintApp extends JFrame {
         );
 
         //***************************************************************************************************************//
+        //***************************************** Dotted Cheeck Box Section  ******************************************//
+        JCheckBox dottedCheck = new JCheckBox("Dotted");
+        toolbar.add(dottedCheck);
+
+        dottedCheck.addActionListener(e
+                -> drawingPanel.setDotted(dottedCheck.isSelected())
+        );
+
+        //***************************************************************************************************************// 
         setVisible(true);
     }
 

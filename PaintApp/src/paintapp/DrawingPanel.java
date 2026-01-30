@@ -15,7 +15,8 @@ public class DrawingPanel extends JPanel {
     private List<DrawShape> shapes = new ArrayList<>();
     private int startX, startY, endX, endY;
     private DrawShape previewShape;
-    private boolean filled = true; // default value of filled is not filled "FALSE"
+    private boolean filled = false; // default value of filled is not filled "FALSE"
+    private boolean dotted = false;
 
     private void createPreviewShape() {
         int x = Math.min(startX, endX);
@@ -45,11 +46,26 @@ public class DrawingPanel extends JPanel {
         previewShape = new DrawShape(
                 shape,
                 currentColor,
-                new BasicStroke(2),
+                createStroke(),
                 filled
         );
     }
 
+    
+    private Stroke createStroke() {
+    if (dotted) {
+        return new BasicStroke(
+                2,
+                BasicStroke.CAP_BUTT,
+                BasicStroke.JOIN_MITER,
+                10,
+                new float[]{5},
+                0
+        );
+    } else {
+        return new BasicStroke(2);
+    }
+}
 //*****************************     Public Section *******************************// 
     public DrawingPanel() {
         setBackground(Color.WHITE);
@@ -101,6 +117,10 @@ public class DrawingPanel extends JPanel {
     public void setFilled(boolean filled) {
         this.filled = filled;
     }
+    
+    public void setDotted(boolean dotted) {
+    this.dotted = dotted;
+}
 
 //*****************************     protected Section *******************************//     
     @Override
