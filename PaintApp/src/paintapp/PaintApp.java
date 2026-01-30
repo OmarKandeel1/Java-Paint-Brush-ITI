@@ -7,7 +7,7 @@ package paintapp;
  * @author Reem Adel
  */
 public class PaintApp {
-
+// hello from the other sideeee
     /**
      * @param args the command line arguments
      */
