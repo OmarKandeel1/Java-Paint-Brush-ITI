@@ -17,6 +17,7 @@ public class DrawingPanel extends JPanel {
     private DrawShape previewShape;
     private boolean filled = false; // default value of filled is not filled "FALSE"
     private boolean dotted = false;
+    private int prevX, prevY; // For hand drawing Doodle mood i need this to track my current point and the point in Previous to draw a tiny Line.
 
     private void createPreviewShape() {
         int x = Math.min(startX, endX);
@@ -51,22 +52,22 @@ public class DrawingPanel extends JPanel {
         );
     }
 
-    
     private Stroke createStroke() {
-    if (dotted) {
-        return new BasicStroke(
-                2,
-                BasicStroke.CAP_BUTT,
-                BasicStroke.JOIN_MITER,
-                10,
-                new float[]{5},
-                0
-        );
-    } else {
-        return new BasicStroke(2);
+        if (dotted) {
+            return new BasicStroke(
+                    2,
+                    BasicStroke.CAP_BUTT,
+                    BasicStroke.JOIN_MITER,
+                    10,
+                    new float[]{5},
+                    0
+            );
+        } else {
+            return new BasicStroke(2);
+        }
     }
-}
 //*****************************     Public Section *******************************// 
+
     public DrawingPanel() {
         setBackground(Color.WHITE);
         //*****************************  Mouse Press & Release *****************************// 
@@ -76,10 +77,16 @@ public class DrawingPanel extends JPanel {
             public void mousePressed(MouseEvent e) {
                 startX = e.getX();
                 startY = e.getY();
+                prevX = startX;
+                prevY = startY;
             }
 
             @Override
             public void mouseReleased(MouseEvent e) {
+                if (currentShape == ShapeType.FREE_HAND) {
+                    return;
+                }
+
                 if (previewShape != null) {
                     shapes.add(previewShape);   // make shape permanent
                     previewShape = null;
@@ -96,9 +103,27 @@ public class DrawingPanel extends JPanel {
                 endX = e.getX();
                 endY = e.getY();
 
-                createPreviewShape(); // build shape while dragging
+                if (currentShape == ShapeType.FREE_HAND) {
+                    Shape line = new java.awt.geom.Line2D.Float(prevX, prevY, endX, endY);
+
+                    shapes.add(new DrawShape(
+                            line,
+                            currentColor,
+                            createStroke(),
+                            false
+                    ));
+
+                    prevX = endX;
+                    prevY = endY;
+
+                    repaint();
+                    return;
+                }
+
+                createPreviewShape();
                 repaint();
             }
+
         });
     }
 
@@ -117,10 +142,10 @@ public class DrawingPanel extends JPanel {
     public void setFilled(boolean filled) {
         this.filled = filled;
     }
-    
+
     public void setDotted(boolean dotted) {
-    this.dotted = dotted;
-}
+        this.dotted = dotted;
+    }
 
 //*****************************     protected Section *******************************//     
     @Override
