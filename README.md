@@ -45,3 +45,83 @@ The application follows a clean object-oriented design and proper Swing painting
 
 ## 🗂️ Project Structure
 
+paintapp/
+│
+├── PaintApp.java
+│ ├── Main JFrame
+│ ├── Toolbar (buttons & checkboxes)
+│ └── Connects UI actions to DrawingPanel
+│
+├── DrawingPanel.java
+│ ├── Custom JPanel for drawing
+│ ├── Handles mouse events
+│ ├── Stores and renders shapes
+│ └── Implements Free Hand, Eraser, Undo, Clear
+│
+├── DrawShape.java
+│ ├── Data model for one drawing action
+│ ├── Stores:
+│ │ ├── Shape
+│ │ ├── Color
+│ │ ├── Stroke
+│ │ └── Fill state
+│
+└── README.md
+
+
+---
+
+## 🧩 Class Responsibilities
+
+**PaintApp**
+- Creates the main window (`JFrame`)
+- Builds the toolbar (buttons, checkboxes)
+- Sends user selections (color, shape, options) to `DrawingPanel`
+
+**DrawingPanel**
+- Handles all mouse interactions
+- Manages drawing logic
+- Stores shapes in a list
+- Repaints drawings using `paintComponent`
+- Implements Free-hand drawing, Eraser, Undo, Clear All
+
+**DrawShape**
+- Represents one drawing action
+- Stores:
+  - Shape geometry
+  - Color
+  - Stroke style
+  - Filled or outline state
+- Enables undo and repaint consistency
+
+---
+
+## 🎯 Key Design Decisions
+
+- Shapes are stored instead of drawing directly → prevents loss of drawings during repaint
+- Eraser implemented as drawing background color → maintains undo support
+- Each shape stores its own style → old drawings unaffected by new UI changes
+- Free-hand drawing implemented using small line segments → smooth and responsive
+
+---
+
+## 🛠️ Technologies Used
+
+- Java SE
+- Java Swing
+- AWT `Graphics2D`
+
+---
+
+## 🚀 How to Run
+
+1. Open the project in **NetBeans / IntelliJ / Eclipse**
+2. Make sure all files are in the same package: `paintapp`
+3. Run `PaintApp.java`
+
+---
+
+## 👥 Authors
+
+- **Omar Mamdouh Kandeel**
+- **Reem Adel**
