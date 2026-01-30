@@ -1,2 +1,184 @@
-# Java-Paint-Brush-ITI
-A JFrame-based drawing application with shapes, colors, and undo functionality.
+🎨 Paint Brush – Java Swing Application
+
+A JFrame-based Paint application built using Java Swing, allowing users to draw shapes, doodle freely, erase parts of drawings, undo actions, and clear the canvas.
+The application follows a clean object-oriented design and proper Swing painting principles.
+
+📌 Features
+🎨 Drawing Tools
+
+Line
+
+Rectangle
+
+Oval
+
+Free Hand (Doodle)
+
+🖌️ Styling Options
+
+Color selection
+
+Red
+
+Green
+
+Blue
+
+Filled shapes
+
+Fill rectangles & ovals with selected color
+
+Dotted / Solid stroke
+
+Toggle dashed line style
+
+❌ Editing Tools
+
+Eraser Tool
+
+Erase specific parts of drawings
+
+Implemented as background-colored strokes
+
+Undo
+
+Undo the last drawing action
+
+Clear All
+
+Remove all drawings from the canvas
+
+🧠 Application Workflow
+
+The user selects:
+
+A color
+
+A shape/tool
+
+Optional styling options (Filled / Dotted)
+
+The user draws using the mouse inside the drawing area.
+
+Each drawing action is stored as an object.
+
+The drawing panel redraws all stored shapes whenever repaint occurs.
+
+Undo and Clear operations manipulate the stored shape list.
+
+This design ensures:
+
+Persistent drawings
+
+Proper repaint behavior
+
+Easy undo/redo extensibility
+
+🗂️ Project Structure
+paintapp/
+│
+├── PaintApp.java
+│   ├── Main JFrame
+│   ├── Toolbar (buttons & checkboxes)
+│   ├── Connects UI actions to DrawingPanel
+│
+├── DrawingPanel.java
+│   ├── Custom JPanel for drawing
+│   ├── Handles mouse events
+│   ├── Stores and renders shapes
+│   ├── Implements Free Hand, Eraser, Undo, Clear
+│
+├── DrawShape.java
+│   ├── Data model for one drawing action
+│   ├── Stores:
+│   │   ├── Shape
+│   │   ├── Color
+│   │   ├── Stroke
+│   │   └── Fill state
+│
+└── README.md
+
+🧩 Class Responsibilities
+PaintApp
+
+Creates the main window (JFrame)
+
+Builds the toolbar (buttons, checkboxes)
+
+Sends user selections (color, shape, options) to DrawingPanel
+
+DrawingPanel
+
+Handles all mouse interactions
+
+Manages drawing logic
+
+Stores shapes in a list
+
+Repaints drawings using paintComponent
+
+Implements:
+
+Free hand drawing
+
+Eraser
+
+Undo
+
+Clear all
+
+DrawShape
+
+Represents one drawing action
+
+Stores:
+
+Shape geometry
+
+Color
+
+Stroke style
+
+Filled or outline state
+
+Enables undo and repaint consistency
+
+🎯 Key Design Decisions
+
+Shapes are stored instead of drawing directly
+
+Prevents loss of drawings during repaint
+
+Eraser implemented as drawing background color
+
+Maintains undo support
+
+Each shape stores its own style
+
+Old drawings are unaffected by new UI changes
+
+Free-hand implemented using small line segments
+
+Smooth and responsive drawing
+
+🛠️ Technologies Used
+
+Java SE
+
+Java Swing
+
+AWT Graphics2D
+
+🚀 How to Run
+
+Open the project in NetBeans / IntelliJ / Eclipse
+
+Make sure all files are in the same package: paintapp
+
+Run PaintApp.java
+
+👥 Authors
+
+Omar Mamdouh Kandeel
+
+Reem Adel
