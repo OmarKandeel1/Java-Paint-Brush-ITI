@@ -44,24 +44,8 @@ The application follows a clean object-oriented design and proper Swing painting
 ---
 
 ## 🗂️ Project Structure
-paintapp/
-├── PaintApp.java
-│ ├── Main JFrame
-│ ├── Toolbar (buttons & checkboxes)
-│ └── Connects UI actions to DrawingPanel
-├── DrawingPanel.java
-│ ├── Custom JPanel for drawing
-│ ├── Handles mouse events
-│ ├── Stores and renders shapes
-│ └── Implements Free Hand, Eraser, Undo, Clear
-├── DrawShape.java
-│ ├── Data model for one drawing action
-│ └── Stores:
-│ ├── Shape
-│ ├── Color
-│ ├── Stroke
-│ └── Fill state
-└── README.md
+<img width="386" height="369" alt="image" src="https://github.com/user-attachments/assets/4744b77d-0f28-428e-bcf7-d08ea11186f9" />
+
 
 
 ---
